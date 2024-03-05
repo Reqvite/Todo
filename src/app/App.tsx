@@ -1,21 +1,18 @@
-import { useState } from "react";
+import { ReactElement } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0);
+import { Header } from '@/components'
+import { Todo } from '@/entities/todo'
+import { Container } from '@/shared/ui'
 
+function App(): ReactElement {
   return (
     <>
-      <div></div>
-      <h1>Vite + React</h1>
-      <div>
-        <button onClick={() => setCount(count => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p>Click on the Vite and React logos to learn more</p>
+      <Header/>
+      <Container justifyContent='center' alignItems='center'>
+        <Todo/>
+      </Container>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -5,7 +5,8 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended",
+    "@wemake-services/typescript/recommended",
+    "@wemake-services/javascript",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
@@ -14,12 +15,9 @@ module.exports = {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "no-var": "error",
-    "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-    "prettier/prettier": [
+    "react-refresh/only-export-components": [
       "warn",
-      {
-        endOfline: "auto",
-      },
+      { allowConstantExport: true },
     ],
   },
 };
