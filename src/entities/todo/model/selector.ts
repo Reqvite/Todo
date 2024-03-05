@@ -11,6 +11,14 @@ export const selectFilter =
     (state: ReturnType<typeof store.instance.getState>):
     string => state.todo.filter
 
+export const selectCurrentTodos =
+  (state: ReturnType<typeof store.instance.getState>)
+  : TodoI[] => state.todo.todos
+
+export const selectFilteredTodos =
+  (state: ReturnType<typeof store.instance.getState>)
+  : TodoI[] => state.todo.filteredTodos
+
 export const selectTodos =
   (state: ReturnType<typeof store.instance.getState>): TodoI[] => {
     const filter = state.todo.filter

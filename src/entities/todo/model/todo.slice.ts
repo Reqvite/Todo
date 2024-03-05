@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { TodoI } from '@/shared/types/todo'
 
+import { changeTodoStatus, filterTodos } from './actions'
 import { FilterType } from './data/filter'
 
 type State = {
@@ -30,53 +31,14 @@ const { reducer, actions, name } = createSlice({
     'setTodoValue': (state, action: PayloadAction<string>) => {
       state.todoValue = action.payload
     },
-    'changeTodoStatus':
-      (state, action: PayloadAction<string>) => {
-        const id = action.payload
-
-        const updatedTodos = state.todos.map((todo) => {
-          if (todo.id === id) {
-            return {
-              ...todo,
-              'isCompleted': !todo.isCompleted,
-            }
-          }
-          return todo
-        })
-
-        updatedTodos.sort((first, next) => {
-          if (first.isCompleted !== next.isCompleted) {
-            return first.isCompleted ? 1 : -1
-          }
-          return next.createdAt.localeCompare(first.createdAt)
-        })
-
-        state.todos = updatedTodos
-      },
+    changeTodoStatus,
+    filterTodos,
     'deleteTodoById': (state, action: PayloadAction<string>) => {
       const id = action.payload
       state.todos = state.todos.filter((todo) => todo.id !== id)
-    },
-    'filterTodos': (state, action: PayloadAction<FilterType>) => {
-      state.filter = action.payload
-      switch (action.payload) {
-        case 'completed': {
-          state.filteredTodos = state.todos.filter((todo) => todo.isCompleted)
-          state.filter = 'completed'
-          break
-        }
-        case 'not_completed': {
-          state.filteredTodos = state.todos.filter((todo) => !todo.isCompleted)
-          state.filter = 'not_completed'
-          break
-        }
-        default: {
-          state.filter = 'current'
-          break
-        }
-      }
+      state.filteredTodos = state.filteredTodos.filter((todo) => todo.id !== id)
     },
   },
 })
 
-export { actions, name, reducer }
+export { actions, name, reducer, type State }

@@ -3,14 +3,17 @@ import { ReactElement, useEffect } from 'react'
 
 import { useAppSelector } from '@/shared/helpers/hooks'
 
+import { animation } from '../model/data/animation'
 import { useTodoActions } from '../model/hooks/use-todo-actions'
-import { selectTodos } from '../model/selector'
+import { selectCurrentTodos, selectTodos } from '../model/selector'
 import { EmptyTodoList } from './empty-todo-list'
 import { TodoInput } from './todo-input'
 import { TodoItem } from './todo-item'
 
 export const Todo = (): ReactElement => {
   const todos = useAppSelector(selectTodos)
+  const currentTodos = useAppSelector(selectCurrentTodos)
+
   const { addTodo } = useTodoActions()
 
   useEffect(() => {
@@ -26,9 +29,23 @@ export const Todo = (): ReactElement => {
     }
   }, [addTodo])
 
-  return <Stack w={'50%'} paddingTop={'100px'} paddingBottom={'100px'}>
-    {todos.length === 0 && <EmptyTodoList/>}
-    {todos.map((todo) => <TodoItem key={todo.id} {...todo} />)}
-    <TodoInput/>
-  </Stack>
+  return (
+    <>
+      <Stack w={'50%'}
+        paddingTop={'100px'}
+        paddingBottom={'100px'}
+        overflowY={'auto'}
+      >
+        {currentTodos.length === 0 && <EmptyTodoList />}
+        {todos.length === 0 &&
+          currentTodos.length > 0 &&
+          <EmptyTodoList variant='filterEmptyTodos' />}
+        {todos.map((todo) => <TodoItem
+          key={todo.id}
+          {...animation}
+          {...todo} />)}
+      </Stack>
+      <TodoInput />
+    </>
+  )
 }

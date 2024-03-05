@@ -7,7 +7,11 @@ import { BlurBox } from '@/shared/ui'
 
 export const Header = (): ReactElement => {
   return (
-    <BlurBox position='fixed' w='100%' padding={3}
+    <BlurBox
+      position='fixed'
+      w='100%'
+      padding={3}
+      zIndex={'var(--chakra-zIndices-navbar)'}
     >
       <Flex gap={5} justifyContent={'space-between'} alignItems={'center'}>
         <Stack>

@@ -5,11 +5,25 @@ import { BlurBox } from '@/shared/ui'
 
 import { useTodoActions } from '../model/hooks/use-todo-actions'
 
-export const EmptyTodoList = (): ReactElement => {
+type Props = {
+  variant?: 'filterEmptyTodos' | 'currentTodos'
+}
+
+export const EmptyTodoList = (props: Props): ReactElement => {
+  const { variant } = props
   const { addTodo } = useTodoActions()
+
+  if (variant === 'filterEmptyTodos') {
+    return <BlurBox>
+      <Heading as='h1' size='lg'>
+       No todo found by this filter.
+      </Heading>
+    </BlurBox>
+  }
+
   return (
     <BlurBox>
-      <Stack gap={'10'}>
+      <Stack gap={'10'} >
         <Heading as='h1' size='lg'>
        Simple todo app for efficient task management.
         </Heading>

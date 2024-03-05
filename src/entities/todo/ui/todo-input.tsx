@@ -9,7 +9,7 @@ export const TodoInput = (): ReactElement => {
 
   return (
     <BlurBox position={'fixed'} w='100%' bottom={0} left={0} padding={5}>
-      <Input isRequired label='Write your todo'
+      <Input autoFocus isRequired label='Write your todo'
         value={value}
         onChange={onChangeTodoValue} />
     </BlurBox>
