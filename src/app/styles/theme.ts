@@ -83,9 +83,9 @@ export const getTheme = (colorMode: ColorModeType): ThemeConfig => {
               },
               // eslint-disable-next-line max-len
               'input:not(:placeholder-shown) + label, .chakra-select__wrapper + label, textarea:not(:placeholder-shown) ~ label':
-                {
-                  ...activeLabelStyles,
-                },
+              {
+                ...activeLabelStyles,
+              },
               'label': {
                 'top': 0,
                 'left': 0,
@@ -126,6 +126,17 @@ export const getTheme = (colorMode: ColorModeType): ThemeConfig => {
         },
       },
       'Checkbox': checkboxTheme,
+      'Select': {
+        'variants': {
+          'primary': {
+            'field': {
+              'color': accentColor,
+              'bg': 'transparent',
+              'border': '2px solid var(--chakra-colors-accentColor)',
+            },
+          },
+        },
+      },
     },
   })
 }

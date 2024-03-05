@@ -7,9 +7,18 @@ export const selectTodoValue =
     (state: ReturnType<typeof store.instance.getState>):
     string => state.todo.todoValue
 
-export const selectTodos =
+export const selectFilter =
     (state: ReturnType<typeof store.instance.getState>):
-    TodoI[] => state.todo.todos
+    string => state.todo.filter
+
+export const selectTodos =
+  (state: ReturnType<typeof store.instance.getState>): TodoI[] => {
+    const filter = state.todo.filter
+    if (filter !== 'current') {
+      return state.todo.filteredTodos
+    }
+    return state.todo.todos
+  }
 
 export const selectTodoCounter = createSelector(
   (state: ReturnType<typeof store.instance.getState>) => state.todo.todos,

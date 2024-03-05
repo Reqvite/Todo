@@ -4,6 +4,7 @@ import { ChangeEvent } from 'react'
 import { useAppDispatch, useAppSelector } from '@/shared/helpers/hooks'
 
 import { MIN_VALUE } from '../const'
+import { FilterType } from '../data/filter'
 import { selectTodoValue } from '../selector'
 import { actions } from '../todo.slice'
 
@@ -12,6 +13,7 @@ type ReturnType = {
   onChangeTodoValue: (event: ChangeEvent<HTMLInputElement>) => void
   onChangeTodoStatus: (id: string) => void
   onDeleteTodo: (id: string) => void
+  onChangeFilter: (filter: FilterType) => void
   value: string
 }
 
@@ -46,9 +48,20 @@ export const useTodoActions = (): ReturnType => {
       dispatch(actions.changeTodoStatus(id))
     }
 
+  const onChangeFilter = (filter: FilterType): void => {
+    dispatch(actions.filterTodos(filter))
+  }
+
   const onDeleteTodo = (id:string):void => {
     dispatch(actions.deleteTodoById(id))
   }
 
-  return { addTodo, onChangeTodoValue, onChangeTodoStatus, onDeleteTodo, value }
+  return {
+    addTodo,
+    onChangeTodoValue,
+    onChangeTodoStatus,
+    onDeleteTodo,
+    onChangeFilter,
+    value,
+  }
 }
