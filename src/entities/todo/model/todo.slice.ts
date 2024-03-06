@@ -10,7 +10,7 @@ type State = {
   'filteredTodos': TodoI[]
   'todoValue': string
   'counter': { completed: number, notCompleted: number }
-  filter: FilterType
+  'filter': FilterType
 }
 
 const initialState: State = {
@@ -27,6 +27,9 @@ const { reducer, actions, name } = createSlice({
   'reducers': {
     'addNewTodo': (state, action: PayloadAction<TodoI>) => {
       state.todos = [action.payload, ...state.todos]
+      if (state.filter === 'not_completed') {
+        state.filteredTodos = [action.payload, ...state.filteredTodos]
+      }
     },
     'setTodoValue': (state, action: PayloadAction<string>) => {
       state.todoValue = action.payload
